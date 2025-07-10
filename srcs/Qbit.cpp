@@ -1,9 +1,6 @@
 #include "Qbit.hpp"
 
 
-
-
-
 Qbit::Qbit() : _a(1.0), _b(0.0), _value(0)
 {
     normalize();
@@ -70,6 +67,7 @@ void Qbit::measure()
         _b = 0.0;
     }
     _value = result;
+    normalize();
 }
 
 double Qbit::getProba(bool value) const

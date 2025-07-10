@@ -29,7 +29,7 @@ void QCS::printState() const {
         if (std::abs(_amplitudes[i].imag()) > 1e-10) {
             std::cout << " + " << _amplitudes[i].imag() << "i";
         }
-        std::cout << "  [P=" << std::norm(_amplitudes[i]) << "]";
+        std::cout << "  [P = " << std::norm(_amplitudes[i]) * 100 << "%]";
         std::cout << "\n";
     }
 }
@@ -107,9 +107,10 @@ void QCS::CCNOT(unsigned int c1, unsigned int c2, unsigned int t)
 
 void QCS::H(unsigned int t)
 {
-    const double inv_sqrt2 = 1.0 / std::sqrt(2.0);
     std::vector<std::complex<double>> new_state = _amplitudes;
+    const double inv_sqrt2 = 1.0 / std::sqrt(2.0);
     
+    _array[t].H();
     t = _n - 1 - t;
     for (size_t i = 0; i < _amplitudes.size(); ++i)
     {
@@ -120,7 +121,6 @@ void QCS::H(unsigned int t)
         new_state[j] = (_amplitudes[i] - _amplitudes[j]) * inv_sqrt2;
     }
     _amplitudes = new_state;
-    _array[t].H();
 }
 
 void QCS::H_all()
