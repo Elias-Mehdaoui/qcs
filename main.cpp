@@ -29,6 +29,7 @@ int main(int argc, char**argv)
         QCS qcs = QCS(atoi(argv[1]));
         qcs.H(0);
         qcs.CNOT(0, 1);
+        qcs.H(0);
         
 
         qcs.printState();
